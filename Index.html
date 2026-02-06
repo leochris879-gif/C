@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Be My Valentine?</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #ffeef2;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .container {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 30px;
+            box-shadow: 0 15px 35px rgba(214, 51, 132, 0.2);
+            max-width: 450px;
+            width: 90%;
+            position: relative;
+        }
+
+        h1 { color: #d63384; margin: 15px 0; font-size: 1.8rem; }
+        p { color: #666; font-size: 1.1rem; }
+
+        .heart-img {
+            width: 140px;
+            height: auto;
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+            height: 60px;
+        }
+
+        button {
+            padding: 12px 28px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        #yesBtn { 
+            background-color: #ff4d6d; 
+            color: white; 
+            box-shadow: 0 4px 15px rgba(255, 77, 109, 0.4);
+        }
+        
+        #yesBtn:hover { 
+            background-color: #ff758f; 
+            transform: scale(1.1); 
+        }
+
+        #noBtn {
+            background-color: #adb5bd;
+            color: white;
+            position: absolute;
+            transition: 0.1s ease;
+            z-index: 999;
+        }
+
+        .hidden { display: none; }
+
+        .gift-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .gift-card {
+            padding: 15px;
+            border: 2px solid #ffccd5;
+            border-radius: 15px;
+            cursor: pointer;
+            font-weight: 600;
+            color: #d63384;
+            transition: all 0.3s;
+        }
+
+        .gift-card:hover { 
+            background-color: #ff4d6d; 
+            color: white;
+            border-color: #ff4d6d;
+            transform: translateY(-3px);
+        }
+
+        #finalMessage {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #ff4d6d;
+            margin-top: 25px;
+            padding: 15px;
+            border-radius: 10px;
+            background: #fff0f3;
+            display: none; /* Hidden until a gift is chosen */
+        }
+    </style>
+</head>
+<body>
+
+    <div id="page1" class="container">
+        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHYycW5qamR1Z3R4bmZ3ZzRyeHh4eHh4eHh4eHh4eHh4eHh4eCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/L2kvvS59tHscNlsH5w/giphy.gif" alt="Big Heart" class="heart-img">
+        <h1>Nichu, Will you be my Valentine? 💖</h1>
+        
+        <div class="btn-group">
+            <button id="yesBtn" onclick="goToPage2()">Yes!</button>
+            <button id="noBtn" onmouseover="moveNoButton()" onclick="moveNoButton()">No</button>
+        </div>
+    </div>
+
+    <div id="page2" class="container hidden">
+        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbmZ0ZzR3Ym13ZzRyeHh4eHh4eHh4eHh4eHh4eHh4eCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/T86lxK3L6C3bV5S86v/giphy.gif" alt="Happy Dance" style="width: 100px;">
+        <h1>Yay! I knew it! 😍</h1>
+        <p>Now, pick your special gift:</p>
+        
+        <div class="gift-container">
+            <div class="gift-card" onclick="showGift('A beautiful bouquet of your favorite flowers! 🌹')">🌸 Beautiful Flowers</div>
+            <div class="gift-card" onclick="showGift('A delicious dinner date at your favorite spot! 🍝')">🍕 Yummy Food</div>
+            <div class="gift-card" onclick="showGift('A whole day of cuddles, movies, and ME! 👩‍❤️‍👨')">🎁 Just Me</div>
+        </div>
+
+        <div id="finalMessage"></div>
+    </div>
+
+    <script>
+        // Function to make the "No" button run away
+        function moveNoButton() {
+            const btn = document.getElementById('noBtn');
+            // Calculate random coordinates
+            const x = Math.random() * (window.innerWidth - btn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - btn.offsetHeight);
+            
+            btn.style.left = x + 'px';
+            btn.style.top = y + 'px';
+        }
+
+        // Switch from Proposal to Gift selection
+        function goToPage2() {
+            document.getElementById('page1').classList.add('hidden');
+            document.getElementById('page2').classList.remove('hidden');
+        }
+
+        // Reveal the specific gift message
+        function showGift(message) {
+            const display = document.getElementById('finalMessage');
+            display.style.display = 'block';
+            display.innerText = "Choice accepted! " + message;
+        }
+    </script>
+</body>
+</html>
